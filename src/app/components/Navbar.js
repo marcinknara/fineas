@@ -13,6 +13,9 @@ export default function Navbar() {
         <li>
           <Link href="/profile">Profile</Link>
         </li>
+        <li>
+          <Link href="/visual">Visual</Link>
+        </li>
       </ul>
     </nav>
   );
