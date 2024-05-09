@@ -16,6 +16,9 @@ export default function Navbar() {
         <li>
           <Link href="/visual">Visual</Link>
         </li>
+        <li>
+          <Link href="/openai">OpenAI</Link>
+        </li>
       </ul>
     </nav>
   );
