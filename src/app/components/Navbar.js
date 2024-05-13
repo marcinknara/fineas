@@ -8,13 +8,10 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/phineas">Phineas</Link>
+          <Link href="/fineas">Fineas</Link>
         </li>
         <li>
           <Link href="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link href="/visual">Visual</Link>
         </li>
         <li>
           <Link href="/openai">OpenAI</Link>

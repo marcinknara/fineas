@@ -1,11 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
-import YesNoSwitch from "../components/YesNoSwitch";
 import ButtonSwitch from "../components/ButtonSwitch";
 
 
-export default function Visual() {
+export default function Fineas() {
   const [financialState, setFinancialState] = useState({
     personalInfo: {
       name: "John Doe",

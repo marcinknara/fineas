@@ -91,12 +91,12 @@ export default function OpenAIPage() {
     }
   };
 
-  const openai = new OpenAI({
-    apiKey: '',
-    organization: 'org-IfDeAnDrC7PFaUnMw2x3YfUR',
-    project: 'proj_mldD65B6TiAkJ8JoT5BsbvM5',
-    dangerouslyAllowBrowser: true
-  });
+  // const openai = new OpenAI({
+  //   apiKey: '',
+  //   organization: '',
+  //   project: '',
+  //   dangerouslyAllowBrowser: true
+  // });
 
   // const handleSendPrompt = async () => {
   //   console.log("Using OpenAI Key:", process.env.OPENAI_API_KEY);
