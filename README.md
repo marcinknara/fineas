@@ -1,3 +1,14 @@
+## Welcome to Fineas (renamed from Phineas)
+
+Fineas is a personal project aiming to replace the now-deprecated Mint mobile app.
+Features in the works:
+
+- Financial account aggregation using Plaid (or similar)
+- Use LLMs to analyze your financial profile
+- Provide charts, recommendations, and more based on your connected financial accounts
+
+##
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
