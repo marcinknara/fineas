@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 
 function PortfolioGraph() {
   const chartRef = useRef(null);
+  const [rerender, setRerender] = useState(false);  // State to trigger rerender
 
   // <block:data:2>
   // Simulated data generation for an upward trending portfolio graph
@@ -16,10 +17,16 @@ function PortfolioGraph() {
   // </block:data>
 
   // <block:animation:1>
-  const totalDuration = 10000;
+  const totalDuration = 5000;
   const delayBetweenPoints = totalDuration / data.length;
   const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
   const animation = {
+    onComplete: function (context) {
+      if (context.initial) {
+      } else {
+        setRerender(prev => !prev);
+      }
+    },
     x: {
       type: 'number',
       easing: 'linear',
@@ -91,7 +98,7 @@ function PortfolioGraph() {
     return () => {
       myChart.destroy(); // Cleanup chart on component unmount
     };
-  }, []);
+  }, [rerender]);
 
   return (
     <div style={{ width: '80vh', height: '40vh', margin: '0 auto' }}>

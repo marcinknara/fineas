@@ -1,129 +1,10 @@
-// import Navbar from "../components/Navbar";
-// import { useState, useEffect, useRef, useCallback } from 'react'
-
-
-// export default function Visual() {
-
-//   // Keep track of the classification result and the model loading status.
-//   const [result, setResult] = useState(null);
-//   const [ready, setReady] = useState(null);
-
-//   // Create a reference to the worker object.
-//   const worker = useRef(null);
-
-//   // We use the `useEffect` hook to set up the worker as soon as the `App` component is mounted.
-//   useEffect(() => {
-//     if (!worker.current) {
-//       // Create the worker if it does not yet exist.
-//       worker.current = new Worker(new URL('../worker.js', import.meta.url), {
-//         type: 'module'
-//       });
-//     }
-
-//     // Create a callback function for messages from the worker thread.
-//     const onMessageReceived = (e) => {
-//       switch (e.data.status) {
-//         case 'initiate':
-//           setReady(false);
-//           break;
-//         case 'ready':
-//           setReady(true);
-//           break;
-//         case 'complete':
-//           setResult(e.data.output[0])
-//           break;
-//       }
-//     };
-
-//     // Attach the callback function as an event listener.
-//     worker.current.addEventListener('message', onMessageReceived);
-
-//     // Define a cleanup function for when the component is unmounted.
-//     return () => worker.current.removeEventListener('message', onMessageReceived);
-//   });
-
-//   const classify = useCallback((text) => {
-//     if (worker.current) {
-//       worker.current.postMessage({ text });
-//     }
-//   }, []);
-
-
-//   return (
-//     <main className='bg-gradient-to-r from-purple-900 to-purple-500 w-full bg-cover bg-center'>
-//       <Navbar />
-//       <div className="flex min-h-screen flex-col p-12">
-//         <h1 className="text-5xl font-bold mb-2 text-center text-white">Current Financial State</h1>
-//         <h2 className="text-2xl mb-4 text-center text-white">Read through the questionaire and fill out as much information as you can.</h2>
-//         {/* <input
-//           type="text"
-//           className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
-//           placeholder="Enter text here"
-//           onInput={e => {
-//             classify(e.target.value);
-//           }}
-//         /> */}
-//         <div className="flex">
-//           <h2 className="text-xl mb-4 pr-4 text-white">Weekly income:</h2>
-//           <input
-//             type="text"
-//             className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
-//             placeholder="Enter text here"
-//             onInput={e => {
-//               doSomething(e.target.value);
-//             }}
-//           />
-//         </div>
-//         <div className="flex">
-//           <h2 className="text-xl mb-4 pr-4 text-white">Read through the questionaire and fill out as much information as you can.</h2>
-//           <input
-//             type="text"
-//             className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
-//             placeholder="Enter text here"
-//             onInput={e => {
-//               doSomething(e.target.value);
-//             }}
-//           />
-//         </div>
-//         <div className="flex">
-//           <h2 className="text-xl mb-4 pr-4 text-white">Read through the questionaire and fill out as much information as you can.</h2>
-//           <input
-//             type="text"
-//             className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
-//             placeholder="Enter text here"
-//             onInput={e => {
-//               doSomething(e.target.value);
-//             }}
-//           />
-//         </div>
-//         <div className="flex">
-//           <h2 className="text-xl mb-4 pr-4 text-white">Read through the questionaire and fill out as much information as you can.</h2>
-//           <input
-//             type="text"
-//             className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
-//             placeholder="Enter text here"
-//             onInput={e => {
-//               doSomething(e.target.value);
-//             }}
-//           />
-//         </div>
-//         {ready !== null && (
-//           <pre className="bg-gray-100 p-2 rounded">
-//             {
-//               (!ready || !result) ? 'Loading...' : JSON.stringify(result, null, 2)}
-//           </pre>
-//         )}
-//       </div>
-//     </main >
-//   );
-// }
 'use client'
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
-import YesNoSwitch from "../components/YesNoSwitch";
+import ButtonSwitch from "../components/ButtonSwitch";
 
 
-export default function Visual() {
+export default function Fineas() {
   const [financialState, setFinancialState] = useState({
     personalInfo: {
       name: "John Doe",
@@ -133,15 +14,16 @@ export default function Visual() {
       income: {
         isSalaried: "Y",
         yearlySalary: 52000,
-        weeklySalary: 1000
+        weeklySalary: 1000,
+        weeklyIncome: 1000
       },
       retirementAccounts: {
         rothIRA: {
           hasAccount: true,
-          currentContributionAmount: 3000,
+          currentAccountBalance: 3000,
           yearlyContributionLimit: 6000,
           currentOneYearReturns: 0.065,
-          weeklyContributionPercentageOfWeeklySalary: ''
+          weeklyContributionPercentageOfWeeklySalary: .00
         },
         "401k": {
           hasAccount: true,
@@ -228,9 +110,9 @@ export default function Visual() {
   return (
     <main className='bg-gradient-to-r from-purple-900 to-purple-500 w-full bg-cover bg-center'>
       <Navbar />
-      <div className="flex min-h-screen flex-col p-12">
+      <div className="items-start content-start flex min-h-screen flex-col p-12">
         <h1 className="text-5xl font-bold mb-2 text-center text-white">Financial Information Form</h1>
-        <form onSubmit={handleSubmit} className="w-full max-w-3xl m-auto">
+        <form onSubmit={handleSubmit} className="w-full max-w-md align-start">
 
           {/* Personal Info Section */}
           <div className="mb-4">
@@ -266,29 +148,84 @@ export default function Visual() {
             {showAssets && (
               <>
                 {/* Income Section */}
-                <div className="mb-4">
+                <div className="mb-4 content-start">
                   <h3 className="text-xl font-bold text-white">Income</h3>
-                  {/* Using YesNoSwitch for isSalaried */}
-                  <YesNoSwitch
-                    label="Is Salaried"
-                    path="assets.income.isSalaried"
-                    financialState={financialState}
-                    setFinancialState={setFinancialState}
+                  <ButtonSwitch
+                    label="Are you salaried?"
+                    value={financialState.assets.income.isSalaried}
+                    onChange={(val) => handleChange('assets.income.isSalaried', val)}
                   />
-                  <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="weeklySalary">Weekly Salary</label>
-                    <input
-                      type="number"
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="weeklySalary"
-                      placeholder="Enter weekly salary"
-                      value={financialState.assets.income.weeklySalary}
-                      onChange={e => handleChange('assets.income.weeklySalary', parseFloat(e.target.value))}
-                    />
-                    <h2>{financialState.assets.income.isSalaried}</h2>
-                    <h2>{financialState.assets.income.weeklySalary}</h2>
-                    <h2>{financialState.assets.income.isSalaried}</h2>
-                  </div>
+                  {financialState.assets.income.isSalaried === 'Y' ?
+                    <div className="mb-4">
+                      <label className="block text-white text-sm font-bold mb-2" htmlFor="yearlySalary">Yearly Salary</label>
+                      <input
+                        type="number"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="yearlySalary"
+                        placeholder="Enter yearly salary"
+                        value={financialState.assets.income.yearlySalary}
+                        onChange={e => handleChange('assets.income.yearlySalary', parseFloat(e.target.value))}
+                      />
+                    </div>
+                    :
+                    <div className="mb-4">
+                      <label className="block text-white text-sm font-bold mb-2" htmlFor="weeklyIncome">Weekly Income</label>
+                      <input
+                        type="number"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="weeklyIncome"
+                        placeholder="Enter weekly salary"
+                        value={financialState.assets.income.weeklyIncome}
+                        onChange={e => handleChange('assets.income.weeklyIncome', parseFloat(e.target.value))}
+                      />
+                    </div>
+                  }
+                  <h3 className="text-xl font-bold text-white">Retirement Accounts</h3>
+                  <ButtonSwitch
+                    label="Do you have a Roth IRA?"
+                    value={financialState.assets.retirementAccounts.rothIRA.hasAccount}
+                    onChange={(val) => handleChange('assets.retirementAccounts.rothIRA.hasAccount', val)}
+                  />
+                  {financialState.assets.retirementAccounts.rothIRA.hasAccount === 'Y' ?
+                    <>
+                      <div className="mb-4">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="rothIRABalance">Current Roth IRA Account Balance</label>
+                        <input
+                          type="number"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="rothIRABalance"
+                          placeholder="Enter your current Roth IRA balance"
+                          value={financialState.assets.retirementAccounts.rothIRA.currentAccountBalance}
+                          onChange={e => handleChange('assets.retirementAccounts.rothIRA.currentAccountBalance', parseFloat(e.target.value))}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="rothIRACurrentOneYearReturns">What is your estimated 1 year returns percentage?</label>
+                        <input
+                          type="number"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="rothIRACurrentOneYearReturns"
+                          placeholder="Enter your estimated 1 year returns percentage"
+                          value={financialState.assets.retirementAccounts.rothIRA.currentOneYearReturns}
+                          onChange={e => handleChange('assets.retirementAccounts.rothIRA.currentOneYearReturns', parseFloat(e.target.value))}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label className="block text-white text-sm font-bold mb-2" htmlFor="rothIRABalance">Current Roth IRA Account Balance</label>
+                        <input
+                          type="number"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="rothIRABalance"
+                          placeholder="Enter your current Roth IRA balance"
+                          value={financialState.assets.retirementAccounts.rothIRA.currentAccountBalance}
+                          onChange={e => handleChange('assets.retirementAccounts.rothIRA.currentAccountBalance', parseFloat(e.target.value))}
+                        />
+                      </div>
+                    </>
+
+                    :
+                    null
+                  }
                 </div>
 
                 {/* Add other asset sections here similar to the pattern above */}
