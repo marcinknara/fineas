@@ -14,6 +14,8 @@ export default function SignUp() {
     setPassword(event.target.value);
   };
 
+  const [errorDialog, setErrorDialog] = useState({ visible: false, message: '' });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(JSON.stringify({ email, password }));
@@ -33,15 +35,29 @@ export default function SignUp() {
         console.log(data.message);
       } else {
         console.error(data.message);
+        setErrorDialog({ visible: true, message: data.message });
+        setTimeout(() => setErrorDialog({ visible: false, message: '' }), 10000);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      setErrorDialog({ visible: true, message: error.toString() });
+      setTimeout(() => setErrorDialog({ visible: false, message: '' }), 10000);
     }
   };
 
   return (
     <div className='bg-gradient-to-r from-purple-900 to-purple-500 w-full bg-cover bg-center'>
       <Navbar />
+      {errorDialog.visible && (
+        <div
+          role="alert"
+          className="alert alert-error shadow-lg fixed bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer flex justify-center items-center px-4 py-2"
+          onClick={() => setErrorDialog({ visible: false, message: '' })}
+          style={{ width: 'auto', maxWidth: 'calc(100% - 2rem)' }} // Dynamically adjust width
+        >
+          <span>{errorDialog.message}</span>
+        </div>
+      )}
       <div className="min-h-screen">
         <div className="text-center pt-48 pb-12">
           <h1 className="font-extrabold text-5xl md:text-6xl text-white mb-5">
