@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import PortfolioGraph from './components/PortfolioGraph';
+import Link from 'next/link';
 
 async function getData() {
   const res = await fetch('/api');
@@ -41,9 +42,12 @@ export default function HomePage() {
           <p className="mt-4 text-lg leading-relaxed text-white">
             An AI financial assistant, just for you. Powered by machine learning models to provide you the financial clarity you need.
           </p>
-          <p className="mt-4 text-lg leading-relaxed text-white">
+          {/* <p className="mt-4 text-lg leading-relaxed text-white">
             Data: {data ? JSON.stringify(data, null, 2) : "Loading..."}
-          </p>
+          </p> */}
+          <Link href="/signup">
+            <button className="btn btn-primary">Create an Account</button>
+          </Link>
         </div>
       </div>
     </div>

@@ -17,3 +17,17 @@ try {
 }
 
 export default clientPromise;
+
+// import mongoose from "mongoose";
+
+// const connect = async () => {
+//   if (mongoose.connections[0].readyState) return;
+
+//   try {
+//     await mongoose.connect(process.env.MONGODB_URI!);
+//   } catch (e) {
+//     throw new Error("Failed to connect to MongoDB");
+//   }
+// };
+
+// export default connect;
