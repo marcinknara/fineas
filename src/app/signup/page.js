@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Navbar from "../components/Navbar";
 
@@ -19,7 +19,7 @@ export default function SignUp() {
     console.log(JSON.stringify({ email, password }));
 
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
