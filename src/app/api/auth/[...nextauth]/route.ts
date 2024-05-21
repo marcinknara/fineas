@@ -20,8 +20,6 @@ const handler = NextAuth({
     },
     //Within this is where we query our DB
     async authorize(credentials, req) {
-      console.log({credentials})
-
 
       const client = await clientPromise;
       const db = client.db('fineas-dev');
@@ -35,8 +33,6 @@ const handler = NextAuth({
       }
 
       const passwordCorrect = await compare(credentials?.password || "", user.password);
-
-      console.log({passwordCorrect});
 
       if (passwordCorrect) {
         return {
