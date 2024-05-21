@@ -10,8 +10,6 @@ export async function POST(req) {
 
   const { email, password } = await req.json(); // Use req.json() to parse the JSON body
 
-  console.log(JSON.stringify({ email, password }));
-
   const existingUser = await collection.findOne({ email });
 
   if (existingUser) {

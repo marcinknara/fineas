@@ -8,7 +8,6 @@ const YesNoSwitch = ({ label, path, financialState, setFinancialState }) => {
         current = current[keys[i]];
       }
       current[keys[keys.length - 1]] = value === "Y";
-      console.log(newState);
       return newState;
     });
   };
