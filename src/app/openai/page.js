@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import ReactMarkdown from 'react-markdown';
 export default function OpenAIPage() {
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState('');
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true);
 
   const financialState = {
     personalInfo: {
@@ -123,11 +123,11 @@ export default function OpenAIPage() {
   useEffect(() => {
     main();
     setLoading(false);
-  }, [])
+  }, []);
 
 
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <p>Loading...</p>;
 
   return (
 
