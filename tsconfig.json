@@ -30,7 +30,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx", "src/app/login/LoginForm.js"  ],
+    "**/*.tsx", ],
   "exclude": [
     "node_modules"
   ]

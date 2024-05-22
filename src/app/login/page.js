@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
-import LoginForm from './LoginForm';
 import { redirect } from 'next/navigation';
+import LoginForm from './LoginForm';
+import Navbar from '../components/Navbar';
 
 export default async function Login() {
 
@@ -11,6 +12,7 @@ export default async function Login() {
 
   return (
     <div className='bg-gradient-to-r from-purple-900 to-purple-500 w-full bg-cover bg-center'>
+      <Navbar />
       <div className="min-h-screen">
         <div className="text-center pt-48 pb-12">
           <h1 className="font-extrabold text-5xl md:text-6xl text-white mb-5">
