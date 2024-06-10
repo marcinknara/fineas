@@ -1,6 +1,14 @@
+import { redirect } from "next/navigation";
 import Navbar from "../components/Navbar";
+import { getServerSession } from "next-auth";
 
-export default function Profile() {
+export default async function Profile() {
+
+  const session = await getServerSession();
+  if (!session) {
+    redirect("/");
+  }
+
   return (
     <div className='bg-gradient-to-r from-purple-900 to-purple-500 w-full bg-cover bg-center'>
       <Navbar />
